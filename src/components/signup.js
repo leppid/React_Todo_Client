@@ -1,14 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Link } from 'react-router-dom';
-class Signup extends React.Component {
+import { usrlog } from '../actions/user'
+import { connect } from 'react-redux';
+
+class SignUp extends React.Component {
+  handleSubmit(e) {
+    e.preventDefault()
+    console.log(e)
+    usrlog()
+  }
+
   render() {
+    this.props.dispatch({ type: 'aaa', payload: [{title: 1}] })
+
+    console.log(this.props)
   return (
     <div class="container">
     <h3>Sign Up</h3>
     <br/>
     <div class="form-signin-heading">
-      <form>
+      <form onSubmit={this.handleSubmit.bind(this)}>
 						<input
 							className = 'form-control'
 							type='text'
@@ -50,4 +62,4 @@ class Signup extends React.Component {
   }
 };
 
-export default Signup;
+export default connect()(SignUp);

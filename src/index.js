@@ -4,8 +4,15 @@ import ReactDOM from "react-dom";
 import { Switch, Route, BrowserRouter, Link, Redirect } from 'react-router-dom';
 import Routess from "./components/routes";
 import Header from './components/header';
-import style from "./bootstrap.min.css";
-import styletwo from "./other.css";
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import reducers from './reducers'
+import thunk from 'redux-thunk'
+
+const store = createStore(
+  reducers,
+  applyMiddleware(thunk)
+);
 
 ReactDOM.render(
   <BrowserRouter>
@@ -13,7 +20,10 @@ ReactDOM.render(
       <div>
         <Header />
       </div>
+
       <br/>
-       <center> <Routess /></center>
+      <Provider store={store}>
+        <center> <Routess /></center>
+       </Provider>
     </div>
   </BrowserRouter>, document.getElementById("root"));

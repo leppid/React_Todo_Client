@@ -1,4 +1,6 @@
 {
   "presets": ["env", "react"],
-  "plugins": ["react-html-attrs"]
+  "plugins": [
+    "react-html-attrs"
+  ]
 }
