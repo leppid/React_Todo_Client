@@ -1,21 +1,16 @@
-const url;
+let url
 
 process.env.NODE_ENV == 'production' ?
-  url = 'http://localhost:3001':
+  url = 'http://localhost:3001'
+  :
   url = 'http://localhost:3000'
 
-const sessionurl = URL + '/sessions'
+export const headers = new Headers({ 'Content-Type': 'application/json'})
 
-const usersurl = URL + '/users'
+export const sessionurl = url + '/sessions'
 
-const token = localStorage.getItem('token')
+export const usersurl = url + '/users'
 
-const ulocal = localStorage.getItem('username')
+export const token = localStorage.getItem('token')
 
-export default sessionurl
-
-export default usersurl
-
-export default token
-
-export default ulocal
+export const uemail = localStorage.getItem('email')

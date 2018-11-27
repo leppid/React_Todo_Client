@@ -2,6 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Switch, Route, BrowserRouter, Link, Redirect } from 'react-router-dom';
+import { browserHistory } from 'react-router';
 import Routess from "./components/routes";
 import Header from './components/header';
 import { createStore, applyMiddleware } from 'redux'
@@ -15,12 +16,12 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter history={browserHistory}>
+
     <div>
       <div>
         <Header />
       </div>
-
       <br/>
       <Provider store={store}>
         <center> <Routess /></center>

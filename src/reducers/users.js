@@ -1,13 +1,12 @@
 let initState = {
-  items: [],
-  item: {},
+  user: {}
 }
 
 export default function userReducer(state = initState, action) {
   switch (action.type) {
-    case 'GET_TASKS':
-      const a = {a: 'aaa'}
-      const b = {a: '!', ...a}
+    case 'GET_USER':
+      let user = action.payload
+      console.log(user)
       return state
   }
 

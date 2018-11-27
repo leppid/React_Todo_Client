@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route } from 'react-router-dom';
 import Home from "../components/home";
-import Signin from "../components/signin";
-import SignUp from "../components/signup";
+import Signin from "../components/users/signin";
+import SignUp from "../components/users/signup";
 import About from "../components/about";
 
 class Routess extends React.Component {
