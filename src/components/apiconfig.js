@@ -7,7 +7,7 @@ process.env.NODE_ENV == 'production' ?
 
 export const headers = new Headers({ 'Content-Type': 'application/json'})
 
-export const sessionurl = url + '/sessions'
+export const sessionsurl = url + '/sessions'
 
 export const usersurl = url + '/users'
 

@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Link } from 'react-router-dom';
-import { signUp } from '../../actions/user'
 import { connect } from 'react-redux';
+import { signup } from '../../actions/users'
 
 class SignUp extends React.Component {
   constructor() {
@@ -12,8 +12,9 @@ class SignUp extends React.Component {
        firstname: '',
        lastname: '',
        email: '',
-       password_digest: '',
-       password_confirmation: ''
+       password: '',
+       errors: '',
+       message: ''
 
       }
     }
@@ -27,15 +28,16 @@ class SignUp extends React.Component {
   }
 
   handleChange(field,e) {
-  let newuser = Object.assign(this.state.user)
-  newuser[field] = e.target.value
-  this.setState({user: newuser})
+    let newuser = Object.assign(this.state.user)
+    newuser[field] = e.target.value
+    this.setState({user: newuser})
   }
 
 
   render() {
   return (
     <div class="container">
+    <div class="error-text" name='errors'>{this.state.errors}</div>
     <h3>Sign Up</h3>
     <br/>
     <div class="form-signin-heading">
@@ -44,7 +46,7 @@ class SignUp extends React.Component {
               <input
                 className='form-control'
                 placeholder="Email"
-                type="text"
+                type="email"
                 onChange={this.handleChange.bind(this, 'email')}
                 minLength="8"
 
@@ -72,7 +74,7 @@ class SignUp extends React.Component {
                 className='form-control'
                 placeholder="Password"
                 type="password"
-                onChange={this.handleChange.bind(this, 'password_digest')}
+                onChange={this.handleChange.bind(this, 'password')}
                 minLength="6"
                 required
               />
@@ -99,11 +101,10 @@ class SignUp extends React.Component {
   )
   }
 };
-
 export default connect(
 state => ({}),
 dispatch => ({
   onSignUp: (user) => {
-    dispatch(signUp(user));
+    dispatch(signup(user));
   }
 }))(SignUp);

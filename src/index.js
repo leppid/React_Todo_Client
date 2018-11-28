@@ -1,14 +1,14 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { Switch, Route, BrowserRouter, Link, Redirect } from 'react-router-dom';
-import { browserHistory } from 'react-router';
+import { Switch, Route, Router, Link, Redirect } from 'react-router-dom';
 import Routess from "./components/routes";
 import Header from './components/header';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
 import thunk from 'redux-thunk'
+import hist from './services/hist'
 
 const store = createStore(
   reducers,
@@ -16,8 +16,7 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <BrowserRouter history={browserHistory}>
-
+  <Router history={hist}>
     <div>
       <div>
         <Header />
@@ -27,4 +26,4 @@ ReactDOM.render(
         <center> <Routess /></center>
        </Provider>
     </div>
-  </BrowserRouter>, document.getElementById("root"));
+  </Router>, document.getElementById("root"));

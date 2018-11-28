@@ -1,29 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Link } from 'react-router-dom';
-class Signin extends React.Component {
-constructor(props){
+import { connect } from "react-redux";
+import { signin } from '../../actions/sessions'
+class SignIn extends React.Component {
+
+  constructor(props){
   super(props)
   this.state = {
    session: {
     email:'',
-    password:''
+    password:'',
+    errors: '',
+    message: ''
    }
   }
-
-  this.onChange = this.onChange.bind(this);
-  this.onSubmit = this.onSubmit.bind(this);
 }
 
-onChange(e){
-   let newsession = this.state.session
-   newsession = e.target.value
-   this.setState({ session: newsession });
-   console.log(this.state.newsession)
+handleSubmit(e) {
+  e.preventDefault()
+  this.props.onSignIn(this.state.session)
+  console.log(this.state.session)
 }
 
-onSubmit(e){
-    this.props.onSignIn(this.state.session)
+handleChange(field,e) {
+let newsession = Object.assign(this.state.session)
+newsession[field] = e.target.value
+this.setState({session: newsession})
 }
 
   render() {
@@ -38,7 +41,7 @@ onSubmit(e){
 							type='email'
 							placeholder='Email'
               name='email'
-              onChange={this.onChange}
+              onChange={this.handleChange.bind(this, 'email')}
 						/>
 						<br />
     				<input
@@ -46,7 +49,7 @@ onSubmit(e){
 							type='password'
 							placeholder='Password'
               name='password'
-              onChange={this.onChange}
+              onChange={this.handleChange.bind(this, 'password')}
 
 						/>
 						<br />
@@ -64,4 +67,10 @@ onSubmit(e){
   }
 };
 
-export default Signin;
+export default connect(
+state => ({}),
+dispatch => ({
+  onSignIn: (sessions) => {
+    dispatch(signin(sessions))
+  }
+})) (SignIn);
