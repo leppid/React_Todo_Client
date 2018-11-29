@@ -5,13 +5,13 @@ import { emailActivation } from '../../actions/users';
 class Activation extends React.Component {
 
   componentDidMount() {
-    const { search } = this.props.location
+    const {search} = this.props.location
     const token = search.replace('?token=', '')
     console.log(token)
     this.props.onEmailActivation(token);
   }
   render() {
-    return(
+    return (
       <div>
       </div>
     );
@@ -20,10 +20,10 @@ class Activation extends React.Component {
 }
 
 export default connect(ownProps => ({
-  ownProps
-}),
-dispatch => ({
-  onEmailActivation: (token) => {
-    dispatch(emailActivation(token));
-  }
-}))(Activation)
+    ownProps
+  }),
+  dispatch => ({
+    onEmailActivation: (token) => {
+      dispatch(emailActivation(token));
+    }
+  }))(Activation)
