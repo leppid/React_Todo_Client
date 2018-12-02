@@ -1,10 +1,8 @@
 import axios from 'axios'
 import React from 'react'
-import {
-  usersurl,
-  headers
-} from '../components/apiconfig'
+import {usersurl, headers} from '../components/apiconfig'
 import hist from '../services/hist'
+import {notify} from 'reapop';
 
 export function signup(user) {
   return function (dispatch, getState) {
@@ -19,11 +17,10 @@ export function signup(user) {
         if (res.status === 200) {
           setTimeout(() => {
             hist.push('/signin');
-            location.reload()
           })
         } else {
           console.log('Connection error')
-        }(dispatch);
+        }(dispatch(notify({message: res.data.message, status: res.data.status })));
 
 
       })
@@ -48,7 +45,7 @@ export function emailActivation(token) {
           })
         } else {
           console.log('Connection error')
-        };
+        }(dispatch(notify({message: res.data.message, status: res.data.status })));
 
 
       })

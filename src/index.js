@@ -9,6 +9,9 @@ import { Provider } from 'react-redux'
 import reducers from './reducers'
 import thunk from 'redux-thunk'
 import hist from './services/hist'
+import NotificationsSystem from 'reapop'
+import theme from 'reapop-theme-bootstrap'
+import 'babel-polyfill'
 
 const store = createStore(
   reducers,
@@ -23,7 +26,7 @@ ReactDOM.render(
       </div>
       <br/>
       <Provider store={store}>
-        <center> <Routess /></center>
+        <center> <Routess /><NotificationsSystem theme={theme} /></center>
        </Provider>
     </div>
   </Router>, document.getElementById("root"));

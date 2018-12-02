@@ -9,9 +9,7 @@ class SignIn extends React.Component {
     this.state = {
       session: {
         email: "",
-        password: "",
-        errors: "",
-        message: ""
+        password: ""
       }
     };
   }
@@ -27,6 +25,7 @@ class SignIn extends React.Component {
     newsession[field] = e.target.value;
     this.setState({ session: newsession });
   }
+
 
   render() {
     return (

@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import hist from '../services/hist'
 import { sessionsurl, headers } from '../components/apiconfig'
+import {notify} from 'reapop';
 
 export function signin(session) {
   return function (dispatch, getState) {
@@ -19,8 +20,7 @@ export function signin(session) {
           hist.push('/')
           location.reload()
         } else {
-          console.log('Connection error')
-        }(dispatch);
+        }(dispatch(notify({message: res.data.message, status: res.data.status })));
 
 
       })
