@@ -1,5 +1,5 @@
 {
-  "presets": ["env", "react"],
+  "presets": ["env","stage-0","stage-3", "react"],
   "plugins": [
     "react-html-attrs"
   ]

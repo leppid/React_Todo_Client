@@ -33,15 +33,12 @@ export function emailActivation(token) {
     let body = {
       user: token
     }
-    axios.post(`${usersurl}/confirmemail`, body, {
-        headers: headers
-      })
+    axios.post(`${usersurl}/confirmemail`, body, { headers: headers })
 
       .then(res => {
         if (res.status === 200) {
           setTimeout(() => {
             hist.push('/signin');
-            location.reload()
           })
         } else {
           console.log('Connection error')
