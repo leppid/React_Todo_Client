@@ -4,21 +4,21 @@ let initState = {
     items: {},
     item: []
   }
-  
+
   export default function TaskReducer(state = initState, action) {
     switch (action.type) {
         case GET_TASKS:
           return {
             ...state,
-            items: action.payload 
+            items: action.payload
           }
 
         case GET_TASK:
           return {
             ...state,
-            item: action.payload 
+            item: action.payload
           }
-        
+
         case ADD_TASK:
           return {
             ...state,

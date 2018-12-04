@@ -1,13 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
 import { doneTask, deleteTask, getTask, getTasks } from "../../actions/tasks";
+import PropTypes from 'prop-types';
 class TasksList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        tasks: "",
-        checked: ""
+        tasks: [],
+        checked: []
     };
+  }
+
+  static contextTypes = {
+    store: PropTypes.object
+  }
+
+  componentDidMount () {
+    this.context.store.dispatch(getTasks());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ tasks: nextProps.tasks });
+
   }
 
   handleDone (id, active) {
@@ -20,12 +34,22 @@ class TasksList extends React.Component {
 
 
   render() {
+    console.log(this.state.tasks)
     return (
       <div class="container">
-        <h3>Tasks</h3>
-        <hr/>
+        <h5>Tasks here</h5>
       </div>
-    );
+    )
+        {this.props.tasks.map( (task) => {
+            return (
+              <div key={task.id} className='container-fluid'>
+              <div className="col-xs-7">{ task.title }</div>
+              </div>
+            );
+
+          }
+        )}
+
   }
 }
 

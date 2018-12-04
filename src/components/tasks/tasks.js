@@ -5,8 +5,10 @@ class Tasks extends React.Component {
     render(){
   return (
     <div className="container">
-     <TasksList />  
-    </div>
+        <h3>Tasks</h3>
+        <hr/>
+        <TasksList />
+      </div>
   );
 }}
 

@@ -11,6 +11,8 @@ export const sessionsurl = url + '/sessions'
 
 export const usersurl = url + '/users'
 
+export const tasksurl = url + '/tasks'
+
 export const token = localStorage.getItem('activation_digest')
 
 export const email = localStorage.getItem('email')

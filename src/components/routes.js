@@ -6,6 +6,7 @@ import SignOut from "../components/users/signout";
 import SignIn from "../components/users/signin";
 import SignUp from "../components/users/signup";
 import Tasks from "../components/tasks/tasks";
+import TaskAdd from "../components/tasks/taskadd"
 import About from "../components/about";
 import Activation from "../components/users/activation"
 import { token } from './apiconfig'
@@ -18,6 +19,7 @@ class Routess extends React.Component {
       <Switch>
         <Route exact path='/' component={Tasks}/>
         <Route exact path='/tasks' component={Tasks}/>
+        <Route exact path='/newtask' component={TaskAdd}/>
         <Route exact path='/signout' component={SignOut}/>
         <Route exact path='/about' component={About}/>
         <Route exact path="/activation" component={Activation} />
