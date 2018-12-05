@@ -32,6 +32,7 @@
     "reapop-theme-bootstrap": "^1.0.1",
     "reapop-theme-wybo": "^1.0.2",
     "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "validator": "^6.2.0",
     "webpack-preset": "^0.2.0",

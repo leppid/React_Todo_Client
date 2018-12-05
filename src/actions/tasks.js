@@ -16,6 +16,7 @@ export function getTasks() {
         .then(res => {
           if (res.status === 200) {
             dispatch({ type: GET_TASKS, payload: res.data });
+            console.log(res.data)
           };
         })
         .catch(e => {
@@ -87,13 +88,8 @@ export function deleteTask(id) {
       axios.delete(`${tasksurl}/${id}`, { headers: HEADERS })
 
         .then(res => {
-          if (res.status === 200) {
-            dispatch({ type: DELETE_TASK, payload: res.data });
-            dispatch(notify({message: 'Task has been deleted', status: 'success' }))
-            setTimeout(() => {
-               hist.push('/tasks')
-            })
-          }
+            dispatch({ type: DELETE_TASK, payload: id });
+            dispatch(notify({message: 'Task has been deleted', status: 'error' }))
         })
         .catch(e => {
           console.error("error: ", e);

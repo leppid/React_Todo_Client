@@ -33,28 +33,41 @@ class TasksList extends React.Component {
   }
 
 
-  render() {
-    console.log(this.state.tasks)
+  render () {
     return (
-      <div class="container">
-        <h5>Tasks here</h5>
-      </div>
-    )
+        <div className='row mb-2'>
+
         {this.props.tasks.map( (task) => {
+          if (!task.done) {
+
             return (
-              <div key={task.id} className='container-fluid'>
-              <div className="col-xs-7">{ task.title }</div>
-              </div>
+              <div className="col-md-6">
+                 <div className="card flex-md-row mb-4 shadow-sm h-md-250">
+                  <div className="card-body d-flex flex-column align-items-start">
+                   <div key={task.id} className=''></div>
+                   <div className="">{ task.title }</div>
+                   <div className="">{ task.priority }</div>
+                   <br/>
+                   <button className="btn btn-outline-danger" onClick={this.handleDelete.bind(this, task.id)} title="Delete">Delete</button>
+                  </div>
+                  </div>
+                  </div>
             );
 
           }
-        )}
-
+        })}
+      </div>
+    );
   }
+
 }
 
+const mapStateToProps = (state) => ({
+  tasks: state.task.items
+})
+
 export default connect(
-  state => ({}),
+  mapStateToProps,
   dispatch => ({
     onDoneTask: (id, done) => {
       dispatch(doneTask(id, done));

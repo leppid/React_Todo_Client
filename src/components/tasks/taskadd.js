@@ -28,6 +28,12 @@ class TaskAdd extends React.Component {
     this.props.onAddTask(this.state.task);
   }
 
+  handlePriority(priority) {
+    let prior = document.getElementById('priority')
+    prior.value = priority;
+    let event = new Event('input');
+    prior.dispatchEvent(event);
+  }
   render(){
 return (
 <div class="container">
@@ -57,11 +63,16 @@ return (
               <input
                 className='form-control'
                 placeholder="Priority"
-                type="text"
-                onChange={this.handleChange.bind(this, 'priority')}
+                id="priority"
+                type="number"
                 required
+                onChange={this.handleChange.bind(this, 'priority')}
               />
-              <br/>
+              <div className="text-left mb-3 mt-3">
+               <span className="btn btn-primary" onClick={this.handlePriority.bind(this, 1)}>High</span>&nbsp;
+               <span className="btn btn-warning" onClick={this.handlePriority.bind(this, 2)} >Medium</span>&nbsp;
+               <span className="btn btn-secondary" onClick={this.handlePriority.bind(this, 3)}>Low</span>
+               </div>
               <input
                 className='form-control'
                 placeholder="Duedate"

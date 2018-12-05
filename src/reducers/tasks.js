@@ -1,11 +1,9 @@
 import { GET_TASKS, GET_TASK, ADD_TASK, DELETE_TASK, DONE_TASK } from '../actions/actionTypes';
 
-let initState = {
-    items: {},
+  export default function TaskReducer(state = {
+    items: [],
     item: []
-  }
-
-  export default function TaskReducer(state = initState, action) {
+  }, action) {
     switch (action.type) {
         case GET_TASKS:
           return {
