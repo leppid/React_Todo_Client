@@ -50,8 +50,7 @@ export function getTasks() {
         }
         let task = {id: id, done: done}
         let body = {task: task}
-      axios.get(`${tasksurl}/${task.id}`, body , { headers: HEADERS })
-
+      axios.patch(`${tasksurl}/${task.id}`, body , { headers: HEADERS })
         .then(res => {
           if (res.status === 200) {
             dispatch({ type: DONE_TASK, payload: res.data });

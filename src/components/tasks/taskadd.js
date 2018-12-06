@@ -29,11 +29,14 @@ class TaskAdd extends React.Component {
   }
 
   handlePriority(priority) {
-    let prior = document.getElementById('priority')
-    prior.value = priority;
-    let event = new Event('input');
-    prior.dispatchEvent(event);
+    let field = document.getElementById('priority')
+    field.value = priority
+    let prior = this.state.task
+    prior.priority = field.value
+    this.setState({ task: prior});
+
   }
+
   render(){
 return (
 <div class="container">
@@ -48,7 +51,6 @@ return (
                 placeholder="Title"
                 type="text"
                 onChange={this.handleChange.bind(this, 'title')}
-                minLength="8"
 
               />
               <br/>
@@ -65,18 +67,21 @@ return (
                 placeholder="Priority"
                 id="priority"
                 type="number"
-                required
                 onChange={this.handleChange.bind(this, 'priority')}
+                disabled="true"
+                required
+
               />
-              <div className="text-left mb-3 mt-3">
-               <span className="btn btn-primary" onClick={this.handlePriority.bind(this, 1)}>High</span>&nbsp;
-               <span className="btn btn-warning" onClick={this.handlePriority.bind(this, 2)} >Medium</span>&nbsp;
-               <span className="btn btn-secondary" onClick={this.handlePriority.bind(this, 3)}>Low</span>
+              <div className="text-left mb-3 mt-3" data-toggle="buttons" >
+               <span className="btn btn-primary" onClick={this.handlePriority.bind(this, "1")}>High</span>&nbsp;
+               <span className="btn btn-warning" onClick={this.handlePriority.bind(this, "2")} >Medium</span>&nbsp;
+               <span className="btn btn-secondary" onClick={this.handlePriority.bind(this, "3")}>Low</span>
                </div>
               <input
                 className='form-control'
                 placeholder="Duedate"
                 type="date"
+                id="date"
                 onChange={this.handleChange.bind(this, 'duedate')}
                 minLength="6"
                 required

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { doneTask, deleteTask, getTask, getTasks } from "../../actions/tasks";
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 class TasksList extends React.Component {
   constructor(props) {
@@ -41,12 +42,29 @@ class TasksList extends React.Component {
           if (!task.done) {
 
             return (
-              <div className="col-md-6">
+              <div key={task.id} className="col-md-6">
                  <div className="card flex-md-row mb-4 shadow-sm h-md-250">
                   <div className="card-body d-flex flex-column align-items-start">
-                   <div key={task.id} className=''></div>
-                   <div className="">{ task.title }</div>
-                   <div className="">{ task.priority }</div>
+                   <h3><div className=""><Link to= { `/tasks/${task.id}`}>{ task.title }</Link></div></h3>
+                   <div className={(task.priority === 1) ? 'btn btn-primary' : (task.priority === 2) ? 'btn btn-warning' : (task.priority === 3) ? 'btn btn-secondary': ''}>{(task.priority === 1) ? 'High' : (task.priority === 2) ? 'Medium' : (task.priority === 3) ? 'Low': ''}</div>
+                   <br/>
+                   <button className="btn btn-outline-danger" onClick={this.handleDelete.bind(this, task.id)} title="Delete">Delete</button>
+                  </div>
+                  </div>
+                  </div>
+            );
+
+          }
+        })}
+          {this.props.tasks.map( (task) => {
+          if (task.done) {
+
+            return (
+              <div key={task.id} className="col-md-6">
+                 <div className="card flex-md-row mb-4 shadow-sm h-md-250">
+                  <div className="card-body d-flex flex-column align-items-start">
+                   <h3><div className=""><Link to= { `/tasks/${task.id}`}>{ task.title }</Link></div></h3>
+                   <div className="btn btn-success">Task Done</div>
                    <br/>
                    <button className="btn btn-outline-danger" onClick={this.handleDelete.bind(this, task.id)} title="Delete">Delete</button>
                   </div>
@@ -57,7 +75,10 @@ class TasksList extends React.Component {
           }
         })}
       </div>
-    );
+
+    )
+
+
   }
 
 }

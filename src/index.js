@@ -25,7 +25,6 @@ ReactDOM.render(
       <div>
         <Header />
       </div>
-      <br/>
       <Provider store={store}>
         <center> <Routess /><NotificationsSystem theme={theme} /></center>
        </Provider>
