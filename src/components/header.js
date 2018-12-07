@@ -10,7 +10,8 @@ class Header extends React.Component {
       <h5 class="my-0 mr-md-auto font-weight-normal">
       <a class="btn btn-outline-primary" href="/">ToDo Dashboard</a></h5>
       <a class="p-2 text-dark" href="#">{localStorage.getItem('fullname')}</a>&nbsp;
-      <a class="btn btn-outline-secondary" href="/newtask">Add Task</a>&nbsp;
+      <a class="btn btn-outline-secondary mr-1" href="/newtask">Add Task</a>
+      <a href="/deltasks" className="btn btn-outline-secondary mr-1">Delete Tasks</a>
       <a class="btn btn-outline-primary" href="/signout" >Sign Out</a>
       </div>
     </div>

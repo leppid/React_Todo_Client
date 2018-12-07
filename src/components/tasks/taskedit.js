@@ -1,20 +1,29 @@
 import React  from 'react';
 import { connect } from 'react-redux';
-import { addTask } from '../../actions/tasks';
+import { editTask, getTask } from '../../actions/tasks';
+import PropTypes from 'prop-types'
 
-class TaskAdd extends React.Component {
+class TaskEdit extends React.Component {
   constructor() {
     super()
     this.state = {
-      task: {
-        title: '',
-        description: '',
-        priority: '',
-        duedate: '',
-        userid: '',
-        done: false
-      }
+      task: {}
     }
+  }
+
+  static contextTypes = {
+    store: PropTypes.object
+  }
+
+  componentDidMount () {
+
+    let id = this.props.match.params.id
+     this.context.store.dispatch(getTask(id))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ task: nextProps.task });
+
   }
 
   handleChange(field, e) {
@@ -25,7 +34,7 @@ class TaskAdd extends React.Component {
 
   handleSubmit(element) {
     element.preventDefault();
-    this.props.onAddTask(this.state.task);
+    this.props.onEditTask(this.state.task);
   }
 
   handlePriority(priority) {
@@ -38,10 +47,11 @@ class TaskAdd extends React.Component {
   }
 
   render(){
+    const task = this.state.task;
 return (
 <div class="container">
     <div class="error-text" name='errors'>{this.state.errors}</div>
-    <h3>Create Task</h3>
+    <h3>Editing {task.title}</h3>
     <br/>
     <div class="form-signin-heading">
       <form onSubmit={this.handleSubmit.bind(this)}>
@@ -51,6 +61,7 @@ return (
                 placeholder="Title"
                 type="text"
                 onChange={this.handleChange.bind(this, 'title')}
+                value={task.title}
 
               />
               <br/>
@@ -59,6 +70,7 @@ return (
                 placeholder="Description"
                 type="text"
                 onChange={this.handleChange.bind(this, 'description')}
+                value={task.description}
 
               />
               <br/>
@@ -69,6 +81,7 @@ return (
                 type="number"
                 onChange={this.handleChange.bind(this, 'priority')}
                 disabled={true}
+                value={task.priority}
                 required
 
               />
@@ -84,13 +97,14 @@ return (
                 id="date"
                 onChange={this.handleChange.bind(this, 'duedate')}
                 minLength="6"
+                value={task.duedate}
                 required
               />
               <br />
               <input
                className = 'btn btn-info'
                type='submit'
-               value='Create'
+               value='Update'
               />
               <br />
 </div>
@@ -100,11 +114,15 @@ return (
 );
 }}
 
+const mapStateToProps = (state) => ({
+  task: state.task.item
+})
+
 export default connect(
-  state => ({}),
+  mapStateToProps,
   dispatch => ({
-    onAddTask: (task) => {
-      dispatch(addTask(task))
+    onEditTask: (task) => {
+      dispatch(editTask(task))
     }
   })
-)(TaskAdd);
+)(TaskEdit);

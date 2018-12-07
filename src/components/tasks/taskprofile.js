@@ -2,7 +2,8 @@ import React from "react"
 import { connect } from "react-redux"
 import { getTask, deleteTask, doneTask } from "../../actions/tasks"
 import hist from '../../services/hist'
-import PropTypes from 'prop-types'
+import { Link } from "react-router-dom";
+
 
 class TaskProfile extends React.Component {
 
@@ -18,6 +19,7 @@ class TaskProfile extends React.Component {
 
   handleDone (id, done) {
     this.props.onDoneTask(id, done);
+    hist.push("/tasks")
   }
 
 
@@ -37,10 +39,10 @@ class TaskProfile extends React.Component {
          <div className={(task.priority === 1) ? 'btn btn-primary' : (task.priority === 2) ? 'btn btn-warning' : (task.priority === 3) ? 'btn btn-secondary': ''}>{(task.priority === 1) ? 'High' : (task.priority === 2) ? 'Medium' : (task.priority === 3) ? 'Low': ''}</div>
          <div className="btn btn-outline-primary ml-2">Need to do to { task.duedate }</div>
          <br/><br/>
-         <h3><span className="btn btn-dark">Task Active</span></h3>
+         <h3><span className={(!task.done) ? 'btn btn-dark' : (task.done) ? 'btn btn-success' : ''}>{(!task.done) ? 'Task Active' : (task.done) ? 'Task Done' : ''}</span></h3>
          <hr/>
-         <span className="btn btn-outline-success mr-2" onClick={this.handleDone.bind(this, task.id, task.done)}>Done</span>
-         <span className="btn btn-outline-warning mr-2">Edit</span>
+         <span className={(!task.done) ? "btn btn-outline-success mr-2" : (task.done) ? "btn btn-outline-dark mr-2" : ''} onClick={this.handleDone.bind(this, task.id, task.done)}>{(!task.done) ? 'Done' : (task.done) ? "Activate" : ''}</span>
+         <Link to={`/tasks/${task.id}/edit`}><span className="btn btn-outline-warning mr-2">Edit</span></Link>
          <span className="btn btn-outline-danger" onClick={this.handleDelete.bind(this, task.id)}>Delete</span>
         </div>
        </div>

@@ -5,6 +5,7 @@ const path = require('path')
 module.exports = {
   entry:  './src/index.js',
   output: {
+    publicPath: '/',
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
   },
@@ -33,7 +34,8 @@ module.exports = {
     }]
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    publicPath: '/'
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -7,7 +7,9 @@ import SignIn from "../components/users/signin";
 import SignUp from "../components/users/signup";
 import Tasks from "../components/tasks/tasks";
 import TaskAdd from "../components/tasks/taskadd"
+import TaskEdit from "../components/tasks/taskedit"
 import TaskProfile from "../components/tasks/taskprofile"
+import TasksDel from "../components/tasks/tasksDel"
 import About from "../components/about";
 import Activation from "../components/users/activation"
 import { token } from './apiconfig'
@@ -20,7 +22,9 @@ class Routess extends React.Component {
       <Switch>
         <Route exact path='/' component={Tasks}/>
         <Route exact path='/tasks' component={Tasks}/>
+        <Route exact path='/deltasks' component={TasksDel}/>
         <Route exact path='/tasks/:id' component={TaskProfile}/>
+        <Route exact path='/tasks/:id/edit' component={TaskEdit}/>
         <Route exact path='/newtask' component={TaskAdd}/>
         <Route exact path='/signout' component={SignOut}/>
         <Route exact path='/about' component={About}/>

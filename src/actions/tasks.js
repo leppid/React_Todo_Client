@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import {tasksurl, headers, token} from '../components/apiconfig'
 import hist from '../services/hist'
-import { GET_TASKS, GET_TASK, ADD_TASK, DELETE_TASK, DONE_TASK } from './actionTypes';
+import { GET_TASKS, GET_TASK, ADD_TASK, DELETE_TASK, DONE_TASK, EDIT_TASK } from './actionTypes';
 import {notify} from 'reapop';
 
 let HEADERS = Object.assign({}, headers )
@@ -54,6 +54,12 @@ export function getTasks() {
         .then(res => {
           if (res.status === 200) {
             dispatch({ type: DONE_TASK, payload: res.data });
+            if (done === true){
+              dispatch(notify({message: 'Task done', status: 'success' }))
+            }else{
+              dispatch(notify({message: 'Task active', status: 'info' }))
+            }
+
           }
         })
         .catch(e => {
@@ -75,6 +81,23 @@ export function getTasks() {
               hist.push('/tasks')
            })
           }
+        })
+        .catch(e => {
+          console.error("error: ", e);
+        })
+    }
+  }
+
+  export function editTask(task) {
+    return function(dispatch, getState) {
+      axios.patch(`${tasksurl}/${task.id}`, task, { headers: HEADERS })
+
+        .then(res => {
+          if (res.status === 200) {
+          dispatch({ type: EDIT_TASK, payload: res.data });
+          hist.push('/tasks')
+          dispatch(notify({message: 'Task has been update', status: 'success' }))
+        }
         })
         .catch(e => {
           console.error("error: ", e);
