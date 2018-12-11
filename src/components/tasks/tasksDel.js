@@ -1,103 +1,182 @@
 import React from "react";
 import { connect } from "react-redux";
-import { doneTask, deleteTask, getTask, getTasks } from "../../actions/tasks";
+import {
+  doneTask,
+  deleteTask,
+  deleteCheckedTasks,
+  getTasks
+} from "../../actions/tasks";
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 class TasksDel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        tasks: [],
-        checked: []
+      tasks: [],
+      checked: []
     };
   }
 
   static contextTypes = {
     store: PropTypes.object
-  }
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     this.context.store.dispatch(getTasks());
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ tasks: nextProps.tasks });
-
   }
 
-  handleDone (id, active) {
-    this.props.onDoneTask(id, active);
+  handleCheck(task) {
+    let tasks = this.state.checked;
+    let index = tasks.indexOf(task);
+    const newArray = this.state.checked;
+    if (index !== -1) {
+      newArray.splice(index, 1);
+    } else {
+      newArray.push(task);
+    }
+    this.setState(() => ({ checked: newArray }));
   }
 
-  handleDelete (id) {
-    this.props.onDeleteTask(id);
+  handleDeleteChecked() {
+    this.props.onDeleteChecked(this.state.checked);
   }
 
+  handleMarkAll() {
+    const checkedTasks = [];
+    this.props.tasks.map(task => {
+      checkedTasks.push(task.id);
+    });
+    this.setState(() => ({ checked: checkedTasks }));
+  }
 
-  render () {
+  handleUnMarkAll() {
+    this.setState({ checked: [] });
+  }
+
+  isChecked = id => {
+    if (this.state.checked.indexOf(id) === -1) return false;
+    return true;
+  };
+
+  render() {
     return (
       <div className="container">
-      <a href="/deltasks" className="btn btn-outline-danger">Delete Tasks</a>
-      <hr/>
-        <div className='row mb-2'>
+        <button
+          className="btn btn-outline-dark mr-2"
+          onClick={this.handleMarkAll.bind(this)}
+        >
+          Mark all
+        </button>
+        <button
+          className="btn btn-outline-dark mr-2"
+          onClick={this.handleUnMarkAll.bind(this)}
+        >
+          Unmark all
+        </button>
+        <button
+          className="btn btn-outline-danger"
+          onClick={this.handleDeleteChecked.bind(this)}
+        >
+          Delete Tasks
+        </button>
 
-        {this.props.tasks.map( (task) => {
-          if (!task.done) {
+        <hr />
+        <div className="row mb-2">
+          {this.props.tasks.map(task => {
+            if (!task.done) {
+              const definePriorCalss =
+                task.priority === 1
+                  ? "btn btn-primary"
+                  : task.priority === 2
+                  ? "btn btn-warning"
+                  : task.priority === 3
+                  ? "btn btn-secondary"
+                  : "";
+              const definePriority =
+                task.priority === 1
+                  ? "High"
+                  : task.priority === 2
+                  ? "Medium"
+                  : task.priority === 3
+                  ? "Low"
+                  : "";
 
-            return (
-              <div key={task.id} className="col-md-6">
-                 <div className="card flex-md-row mb-4 shadow-sm h-md-250">
-                  <div className="card-body d-flex flex-column align-items-start">
-                  <div className=""><input type='checkbox' /></div>
-                   <h3><div className=""><Link to= { `/tasks/${task.id}`}>{ task.title }</Link></div></h3>
-                   <div className={(task.priority === 1) ? 'btn btn-primary' : (task.priority === 2) ? 'btn btn-warning' : (task.priority === 3) ? 'btn btn-secondary': ''}>{(task.priority === 1) ? 'High' : (task.priority === 2) ? 'Medium' : (task.priority === 3) ? 'Low': ''}</div>
+              return (
+                <div key={task.id} className="col-md-6">
+                  <div className="card flex-md-row mb-4 shadow-sm h-md-250 bgprofile">
+                    <div className="card-body d-flex flex-column align-items-start">
+                      <br />
+                      <h3>
+                        <div className="">
+                          <Link to={`/tasks/${task.id}`}>{task.title}</Link>
+                        </div>
+                      </h3>
+                      <div className={definePriorCalss}>{definePriority}</div>
+                      <br />
+                      <label className="containerr">
+                        <input
+                          type="checkbox"
+                          name="makerType"
+                          checked={this.isChecked(task.id)}
+                          onChange={this.handleCheck.bind(this, task.id)}
+                        />
+                        <span class="checkmark" />
+                      </label>
+                      <br />
+                    </div>
                   </div>
+                </div>
+              );
+            }
+          })}
+          {this.props.tasks.map(task => {
+            if (task.done) {
+              return (
+                <div key={task.id} className="col-md-6">
+                  <div className="card flex-md-row mb-4 shadow-sm h-md-250 bgprofile">
+                    <div className="card-body d-flex flex-column align-items-start">
+                      <div className="">
+                        <input type="checkbox" />
+                      </div>
+                      <h3>
+                        <div className="">
+                          <Link to={`/tasks/${task.id}`}>{task.title}</Link>
+                        </div>
+                      </h3>
+                      <div className="btn btn-success">Task Done</div>
+                    </div>
                   </div>
-                  </div>
-            );
-
-          }
-        })}
-          {this.props.tasks.map( (task) => {
-          if (task.done) {
-
-            return (
-              <div key={task.id} className="col-md-6">
-                 <div className="card flex-md-row mb-4 shadow-sm h-md-250">
-                  <div className="card-body d-flex flex-column align-items-start">
-                  <div className=""><input type='checkbox' /></div>
-                   <h3><div className=""><Link to= { `/tasks/${task.id}`}>{ task.title }</Link></div></h3>
-                   <div className="btn btn-success">Task Done</div>
-                  </div>
-                  </div>
-                  </div>
-            );
-
-          }
-        })}
+                </div>
+              );
+            }
+          })}
+        </div>
       </div>
-      </div>
-
-
-    )
-
-
+    );
   }
-
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   tasks: state.task.items
-})
+});
+
+const mapDispatchToProps = dispatch => ({
+  onDoneTask: (id, done) => {
+    dispatch(doneTask(id, done));
+  },
+  onDeleteTask: id => {
+    dispatch(deleteTask(id));
+  },
+  onDeleteChecked: ids => {
+    dispatch(deleteCheckedTasks(ids));
+  }
+});
 
 export default connect(
   mapStateToProps,
-  dispatch => ({
-    onDoneTask: (id, done) => {
-      dispatch(doneTask(id, done));
-    },
-    onDeleteTask: (id) => {
-      dispatch(deleteTask(id));
-    }
-  })
+  mapDispatchToProps
 )(TasksDel);
