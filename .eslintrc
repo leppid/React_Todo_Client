@@ -1,0 +1,10 @@
+{
+  "plugins": ["react-redux"],
+  "extends": ["plugin:react-redux/recommended"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": true
+  }
+}
