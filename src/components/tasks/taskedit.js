@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { editTask, getTask } from "../../actions/tasks";
 import PropTypes from "prop-types";
@@ -7,12 +8,28 @@ class TaskEdit extends React.Component {
   constructor() {
     super();
     this.state = {
-      task: {}
+      task: {
+        title: "",
+        description: "",
+        priority: "",
+        duedate: "",
+        done: ""
+      }
     };
   }
 
   static contextTypes = {
     store: PropTypes.object
+  };
+
+  static propTypes = {
+    item: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      priority: PropTypes.number.isRequired,
+      duedate: PropTypes.string.isRequired,
+      done: PropTypes.bool
+    })
   };
 
   componentDidMount() {
@@ -21,13 +38,13 @@ class TaskEdit extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ task: nextProps.task });
+    this.setState(() => ({ task: nextProps.task }));
   }
 
   handleChange(field, e) {
     let newtask = Object.assign(this.state.task);
     newtask[field] = e.target.value;
-    this.setState({ task: newtask });
+    this.setState(() => ({ task: newtask }));
   }
 
   handleSubmit(element) {
@@ -40,7 +57,7 @@ class TaskEdit extends React.Component {
     field.value = priority;
     let prior = this.state.task;
     prior.priority = field.value;
-    this.setState({ task: prior });
+    this.setState(() => ({ task: prior }));
   }
 
   render() {
@@ -50,7 +67,7 @@ class TaskEdit extends React.Component {
         <div class="error-text" name="errors">
           {this.state.errors}
         </div>
-        <h3>Editing {task.title}</h3>
+        <h3>Editing {this.props.task.title}</h3>
         <br />
         <div class="form-signin-heading">
           <form onSubmit={this.handleSubmit.bind(this)}>

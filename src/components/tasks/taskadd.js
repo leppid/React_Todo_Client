@@ -20,7 +20,7 @@ class TaskAdd extends React.Component {
   handleChange(field, e) {
     let newtask = Object.assign(this.state.task);
     newtask[field] = e.target.value;
-    this.setState({ task: newtask });
+    this.setState(() => ({ task: newtask }));
   }
 
   handleSubmit(element) {
@@ -33,7 +33,7 @@ class TaskAdd extends React.Component {
     field.value = priority;
     let prior = this.state.task;
     prior.priority = field.value;
-    this.setState({ task: prior });
+    this.setState(() => ({ task: prior }));
   }
 
   render() {

@@ -30,7 +30,7 @@ class TasksList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ tasks: nextProps.tasks });
+    this.setState(() => ({ tasks: nextProps.tasks }));
   }
 
   handleDelete(id) {
@@ -42,9 +42,7 @@ class TasksList extends React.Component {
     tasks.sort((a, b) => {
       return a.title > b.title;
     });
-    this.setState(() => ({
-      tasks: tasks
-    }));
+    this.setState(() => ({ tasks: tasks }));
   }
 
   handleSortByPrior() {
@@ -52,9 +50,7 @@ class TasksList extends React.Component {
     tasks.sort((a, b) => {
       return a.priority > b.priority;
     });
-    this.setState(() => ({
-      tasks: tasks
-    }));
+    this.setState(() => ({ tasks: tasks }));
   }
 
   render() {
@@ -128,7 +124,7 @@ class TasksList extends React.Component {
                           <Link to={`/tasks/${task.id}`}>{task.title}</Link>
                         </div>
                       </h3>
-                      <div className="btn btn-success">Task Done</div>
+                      <div className="btn btn-success">Completed</div>
                       <br />
                       <button
                         className="btn btn-outline-danger"

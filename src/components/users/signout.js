@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { emailActivation } from "../../actions/users";
 import hist from "../../services/hist";
 
 class SignOut extends React.Component {

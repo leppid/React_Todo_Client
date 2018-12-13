@@ -11,6 +11,16 @@ class TaskProfile extends React.Component {
     this.props.onGetTask(id);
   }
 
+  static propTypes = {
+    item: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      priority: PropTypes.number.isRequired,
+      duedate: PropTypes.string.isRequired,
+      done: PropTypes.bool
+    })
+  };
+
   handleDelete(id) {
     this.props.onDeleteTask(id);
     hist.push("/");
@@ -22,7 +32,6 @@ class TaskProfile extends React.Component {
   }
 
   render() {
-    console.log(this.props.task);
     const { task } = this.props;
     const definePriorCalss =
       task.priority === 1
@@ -69,7 +78,7 @@ class TaskProfile extends React.Component {
                       : ""
                   }
                 >
-                  {!task.done ? "Task Active" : task.done ? "Task Done" : ""}
+                  {!task.done ? "Active" : task.done ? "Completed" : ""}
                 </span>
               </h3>
               <hr />
@@ -83,7 +92,7 @@ class TaskProfile extends React.Component {
                 }
                 onClick={this.handleDone.bind(this, task.id, task.done)}
               >
-                {!task.done ? "Done" : task.done ? "Activate" : ""}
+                {!task.done ? "Complete" : task.done ? "Activate" : ""}
               </span>
               <Link to={`/tasks/${task.id}/edit`}>
                 <span className="btn btn-outline-warning mr-2">Edit</span>

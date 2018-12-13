@@ -63,9 +63,9 @@ export function doneTask(id, done) {
         if (res.status === 200) {
           dispatch({ type: DONE_TASK, payload: res.data });
           if (done === true) {
-            dispatch(notify({ message: "Task done", status: "success" }));
+            dispatch(notify({ message: "Task Completed", status: "success" }));
           } else {
-            dispatch(notify({ message: "Task active", status: "info" }));
+            dispatch(notify({ message: "Task Activated", status: "info" }));
           }
         }
       })
@@ -124,7 +124,9 @@ export function deleteTask(id) {
 
       .then(res => {
         dispatch({ type: DELETE_TASK, payload: id });
-        dispatch(notify({ message: "Task has been deleted", status: "error" }));
+        dispatch(
+          notify({ message: res.data.message, status: res.data.status })
+        );
       })
       .catch(e => {
         console.error("error: ", e);
@@ -138,15 +140,16 @@ export function deleteCheckedTasks(ids) {
       .post(`${tasksurl}/destroychecked`, { ids: ids }, { headers: HEADERS })
 
       .then(res => {
-        hist.push("/tasks");
-        console.dir(res);
-        const { message } = res.data;
-        dispatch(notify({ message, status: "success" }));
         dispatch({ type: DELETE_TASK, payload: ids });
+        hist.push("/tasks");
+        dispatch(
+          notify({ message: res.data.message, status: res.data.status })
+        );
       })
       .catch(e => {
         const { message } = e.response.data;
-        dispatch(notify({ message, status: "error" }));
+        const { status } = e.response.data;
+        dispatch(notify({ message, status }));
       });
   };
 }

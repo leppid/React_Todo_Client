@@ -12,18 +12,18 @@ class Header extends React.Component {
               <a className="btn btn-outline-primary mr-2" href="/">
                 ToDo Dashboard
               </a>
+              <a href="/deltasks" className="btn btn-outline-secondary mr-2">
+                Delete Tasks
+              </a>
               <a className="btn btn-outline-secondary mr-2" href="/newtask">
                 Add Task
               </a>
-              <a href="/deltasks" className="btn btn-outline-secondary mr-1">
-                Delete Tasks
-              </a>
             </h5>
+            <br />
             <a className="p-2 text-dark" href="#">
               {localStorage.getItem("fullname")}
             </a>
-            &nbsp;
-            <a className="btn btn-outline-primary" href="/signout">
+            <a className="btn btn-outline-primary ml-1" href="/signout">
               Sign Out
             </a>
           </div>

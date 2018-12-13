@@ -1,6 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signin } from "../../actions/sessions";
 
@@ -29,6 +27,7 @@ class SignIn extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="container" onSubmit={this.handleSubmit.bind(this)}>
         <h3>Sign In</h3>

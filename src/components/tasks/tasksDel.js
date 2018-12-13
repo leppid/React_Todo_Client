@@ -32,13 +32,12 @@ class TasksDel extends React.Component {
   handleCheck(task) {
     let tasks = this.state.checked;
     let index = tasks.indexOf(task);
-    const newArray = this.state.checked;
     if (index !== -1) {
-      newArray.splice(index, 1);
+      tasks.splice(index, 1);
     } else {
-      newArray.push(task);
+      tasks.push(task);
     }
-    this.setState(() => ({ checked: newArray }));
+    this.setState(() => ({ checked: tasks }));
   }
 
   handleDeleteChecked() {
@@ -54,7 +53,7 @@ class TasksDel extends React.Component {
   }
 
   handleUnMarkAll() {
-    this.setState({ checked: [] });
+    this.setState(() => ({ checked: [] }));
   }
 
   isChecked = id => {
@@ -144,7 +143,7 @@ class TasksDel extends React.Component {
                           <Link to={`/tasks/${task.id}`}>{task.title}</Link>
                         </div>
                       </h3>
-                      <div className="btn btn-success">Task Done</div>
+                      <div className="btn btn-success">Completed</div>
                       <br />
                       <label className="containerr">
                         <input

@@ -12,6 +12,7 @@ import NotificationsSystem from "reapop";
 import theme from "reapop-theme-bootstrap";
 import "babel-polyfill";
 import logger from "redux-logger";
+import "!style-loader!css-loader!font-awesome/css/font-awesome.min.css";
 import css from "./main.css";
 
 const store = createStore(reducers, compose(applyMiddleware(thunk, logger)));
