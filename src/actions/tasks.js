@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
-import { tasksurl, headers, token } from "../components/apiconfig";
+import { tasksurl, headers } from "../components/constants/apiconfig";
+import { token } from "../components/constants/user";
 import hist from "../services/hist";
 import {
   GET_TASKS,

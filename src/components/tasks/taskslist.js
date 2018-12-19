@@ -18,8 +18,8 @@ class TasksList extends React.Component {
   static propTypes = {
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
-        title: PropTypes.string,
-        priority: PropTypes.number,
+        title: PropTypes.string.isRequired,
+        priority: PropTypes.number.isRequired,
         done: PropTypes.bool
       })
     )
@@ -31,6 +31,7 @@ class TasksList extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState(() => ({ tasks: nextProps.tasks }));
+    console.log(nextProps.tasks);
   }
 
   handleDelete(id) {
@@ -90,20 +91,22 @@ class TasksList extends React.Component {
                   ? "Low"
                   : "";
               return (
-                <div key={task.id} className="col-md-6">
+                <div id="id" key={task.id} className="col-md-6">
                   <div className="card flex-md-row mb-4 shadow-sm h-md-250 bgprofile">
                     <div className="card-body d-flex flex-column align-items-start">
                       <h3>
-                        <div className="">
+                        <div className="" id="title">
                           <Link to={`/tasks/${task.id}`}>{task.title}</Link>
                         </div>
                       </h3>
-                      <div className={definePriorCalss}>{definePriority}</div>
+                      <div className={definePriorCalss} id="priority">
+                        {definePriority}
+                      </div>
                       <br />
                       <button
                         className="btn btn-outline-danger"
                         onClick={this.handleDelete.bind(this, task.id)}
-                        title="Delete"
+                        id="delbtn"
                       >
                         Delete
                       </button>
@@ -116,11 +119,11 @@ class TasksList extends React.Component {
           {this.state.tasks.map(task => {
             if (task.done) {
               return (
-                <div key={task.id} className="col-md-6">
+                <div id="key" key={task.id} className="col-md-6">
                   <div className="card flex-md-row mb-4 shadow-sm h-md-250 bgprofile">
                     <div className="card-body d-flex flex-column align-items-start">
                       <h3>
-                        <div className="">
+                        <div className="" id="title">
                           <Link to={`/tasks/${task.id}`}>{task.title}</Link>
                         </div>
                       </h3>
@@ -130,6 +133,7 @@ class TasksList extends React.Component {
                         className="btn btn-outline-danger"
                         onClick={this.handleDelete.bind(this, task.id)}
                         title="Delete"
+                        id="delbtn"
                       >
                         Delete
                       </button>
@@ -158,7 +162,6 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-// eslint-disable-next-line react-redux/connect-prefer-named-arguments
 export default connect(
   mapStateToProps,
   mapDispatchToProps

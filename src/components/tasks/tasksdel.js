@@ -67,25 +67,28 @@ class TasksDel extends React.Component {
         <button
           className="btn btn-outline-dark mr-2"
           onClick={this.handleMarkAll.bind(this)}
+          id="sort"
         >
           Mark all
         </button>
         <button
           className="btn btn-outline-dark mr-2"
           onClick={this.handleUnMarkAll.bind(this)}
+          id="sort"
         >
           Unmark all
         </button>
         <button
           className="btn btn-outline-danger"
           onClick={this.handleDeleteChecked.bind(this)}
+          id="sort"
         >
           Delete Tasks
         </button>
 
         <hr />
         <div className="row mb-2">
-          {this.props.tasks.map(task => {
+          {this.state.tasks.map(task => {
             if (!task.done) {
               const definePriorCalss =
                 task.priority === 1
@@ -108,13 +111,14 @@ class TasksDel extends React.Component {
                 <div key={task.id} className="col-md-6">
                   <div className="card flex-md-row mb-4 shadow-sm h-md-250 bgprofile">
                     <div className="card-body d-flex flex-column align-items-start">
-                      <br />
                       <h3>
-                        <div className="">
+                        <div className="" id="title">
                           <Link to={`/tasks/${task.id}`}>{task.title}</Link>
                         </div>
                       </h3>
-                      <div className={definePriorCalss}>{definePriority}</div>
+                      <div className={definePriorCalss} id="priority">
+                        {definePriority}
+                      </div>
                       <br />
                       <label className="containerr">
                         <input
@@ -122,6 +126,7 @@ class TasksDel extends React.Component {
                           name="makerType"
                           checked={this.isChecked(task.id)}
                           onChange={this.handleCheck.bind(this, task.id)}
+                          id="checkbox"
                         />
                         <span class="checkmark" />
                       </label>
@@ -132,14 +137,14 @@ class TasksDel extends React.Component {
               );
             }
           })}
-          {this.props.tasks.map(task => {
+          {this.state.tasks.map(task => {
             if (task.done) {
               return (
                 <div key={task.id} className="col-md-6">
                   <div className="card flex-md-row mb-4 shadow-sm h-md-250 bgprofile">
                     <div className="card-body d-flex flex-column align-items-start">
                       <h3>
-                        <div className="">
+                        <div className="" id="title">
                           <Link to={`/tasks/${task.id}`}>{task.title}</Link>
                         </div>
                       </h3>
@@ -151,6 +156,7 @@ class TasksDel extends React.Component {
                           name="makerType"
                           checked={this.isChecked(task.id)}
                           onChange={this.handleCheck.bind(this, task.id)}
+                          id="checkbox"
                         />
                         <span class="checkmark" />
                       </label>

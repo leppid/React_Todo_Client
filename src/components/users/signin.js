@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signin } from "../../actions/sessions";
-
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +26,6 @@ class SignIn extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="container" onSubmit={this.handleSubmit.bind(this)}>
         <h3>Sign In</h3>
@@ -38,7 +36,7 @@ class SignIn extends React.Component {
               className="form-control"
               type="email"
               placeholder="Email"
-              name="email"
+              id="email"
               onChange={this.handleChange.bind(this, "email")}
             />
             <br />
@@ -46,11 +44,16 @@ class SignIn extends React.Component {
               className="form-control"
               type="password"
               placeholder="Password"
-              name="password"
+              id="password"
               onChange={this.handleChange.bind(this, "password")}
             />
             <br />
-            <input className="btn btn-info" type="submit" value="Sign In" />
+            <input
+              className="btn btn-info"
+              type="submit"
+              value="Sign In"
+              id="submit"
+            />
             <br />
           </form>
         </div>

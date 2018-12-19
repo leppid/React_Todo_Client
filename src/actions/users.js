@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { usersurl, headers } from "../components/apiconfig";
+import { usersurl, headers } from "../components/constants/apiconfig";
 import hist from "../services/hist";
 import { notify } from "reapop";
 
@@ -10,9 +10,7 @@ export function signup(user) {
       user: user
     };
     axios
-      .post(`${usersurl}`, body, {
-        headers: headers
-      })
+      .post(`${usersurl}`, body, { headers })
       .then(res => {
         hist.push("/signin");
         dispatch(

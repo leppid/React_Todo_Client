@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Switch, Route, Router, Link, Redirect } from "react-router-dom";
-import Routess from "./components/routes";
+import { Router } from "react-router-dom";
+import Routes from "./components/routes";
 import Header from "./components/header";
 import { createStore, compose, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
 import reducers from "./reducers";
 import thunk from "redux-thunk";
 import hist from "./services/hist";
@@ -25,8 +25,7 @@ ReactDOM.render(
       </div>
       <Provider store={store}>
         <center>
-          {" "}
-          <Routess />
+          <Routes />
           <NotificationsSystem theme={theme} />
         </center>
       </Provider>

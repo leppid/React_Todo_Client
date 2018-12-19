@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import hist from "../services/hist";
-import { sessionsurl, headers } from "../components/apiconfig";
+import { sessionsurl } from "../components/constants/apiconfig";
 import { notify } from "reapop";
 
 export function signin(session) {
@@ -10,7 +10,7 @@ export function signin(session) {
       session: session
     };
     axios
-      .post(`${sessionsurl}`, body, { headers: headers })
+      .post(`${sessionsurl}`, body)
 
       .then(res => {
         const fullname = res.data.user.firstname + " " + res.data.user.lastname;

@@ -55,17 +55,17 @@ class TaskProfile extends React.Component {
           <div className="card flex-md-row mb-4 shadow-sm bgprofile">
             <div className="card-body text-center">
               <h2>
-                <div className="">{task.title}</div>
+                <label className="">{task.title}</label>
               </h2>
               <hr />
               <h4>
-                <div className="">{task.description}</div>
+                <label className="">{task.description}</label>
               </h4>
               <br />
-              <div className={definePriorCalss}>{definePriority}</div>
-              <div className="btn btn-outline-primary ml-2">
+              <span className={definePriorCalss}>{definePriority}</span>
+              <span className="btn btn-outline-primary ml-2">
                 Need to do to {task.duedate}
-              </div>
+              </span>
               <br />
               <br />
               <h3>

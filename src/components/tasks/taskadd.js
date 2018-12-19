@@ -111,15 +111,13 @@ class TaskAdd extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  task: state.task.item
-});
-
 const mapDispatchToProps = dispatch => ({
   onAddTask: task => {
     dispatch(addTask(task));
   }
 });
+
+const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
