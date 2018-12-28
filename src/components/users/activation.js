@@ -14,8 +14,6 @@ class Activation extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
-
 const mapDispatchToProps = dispatch => ({
   onEmailActivation: token => {
     dispatch(emailActivation(token));
@@ -23,6 +21,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Activation);

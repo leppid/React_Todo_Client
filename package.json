@@ -11,11 +11,26 @@
     "test": "jest"
   },
   "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/coverage/",
+    "collectCoverageFrom": [
+      "**/src/**/*.{js,jsx}",
+      "!**/src/actions/**",
+      "!**/src/components/constants/**",
+      "!**/src/services/**",
+      "!**/src/reducers/**",
+      "!**/src/components/routes.js",
+      "!**/src/components/users/activation.js",
+      "!**/src/containers/**",
+      "!**/src/index.js",
+      "!**/src/jest/**",
+      "!**/src/coverage/**"
+    ],
     "transform": {
       "^.+\\.jsx$": "babel-jest",
       "^.+\\.js$": "babel-jest"
     },
-    "setupTestFrameworkScriptFile": "<rootDir>src/setupTests.js"
+    "setupTestFrameworkScriptFile": "<rootDir>src/jest/setupTests.js"
   },
   "author": "",
   "license": "ISC",
@@ -53,6 +68,7 @@
     "babel-eslint": "^8.2.6",
     "babel-jest": "^23.6.0",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
@@ -67,6 +83,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
+    "jest-localstorage-mock": "^2.3.0",
     "mini-css-extract-plugin": "^0.4.4",
     "prettier": "1.15.3",
     "redux-mock-store": "^1.5.3",

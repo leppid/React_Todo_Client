@@ -1,32 +1,11 @@
 import React from "react";
-import { connect } from "react-redux";
-import {
-  doneTask,
-  deleteTask,
-  deleteCheckedTasks,
-  getTasks
-} from "../../actions/tasks";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 class TasksDel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [],
       checked: []
     };
-  }
-
-  static contextTypes = {
-    store: PropTypes.object
-  };
-
-  componentDidMount() {
-    this.context.store.dispatch(getTasks());
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ tasks: nextProps.tasks });
   }
 
   handleCheck(task) {
@@ -62,33 +41,34 @@ class TasksDel extends React.Component {
   };
 
   render() {
+    let tasks = this.props.tasks ? this.props.tasks : [];
     return (
       <div className="container">
         <button
           className="btn btn-outline-dark mr-2"
           onClick={this.handleMarkAll.bind(this)}
-          id="sort"
+          id="mark"
         >
           Mark all
         </button>
         <button
           className="btn btn-outline-dark mr-2"
           onClick={this.handleUnMarkAll.bind(this)}
-          id="sort"
+          id="unmark"
         >
           Unmark all
         </button>
         <button
           className="btn btn-outline-danger"
           onClick={this.handleDeleteChecked.bind(this)}
-          id="sort"
+          id="deltasks"
         >
           Delete Tasks
         </button>
 
         <hr />
         <div className="row mb-2">
-          {this.state.tasks.map(task => {
+          {tasks.map(task => {
             if (!task.done) {
               const definePriorCalss =
                 task.priority === 1
@@ -137,7 +117,7 @@ class TasksDel extends React.Component {
               );
             }
           })}
-          {this.state.tasks.map(task => {
+          {tasks.map(task => {
             if (task.done) {
               return (
                 <div key={task.id} className="col-md-6">
@@ -173,23 +153,4 @@ class TasksDel extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  tasks: state.task.items
-});
-
-const mapDispatchToProps = dispatch => ({
-  onDoneTask: (id, done) => {
-    dispatch(doneTask(id, done));
-  },
-  onDeleteTask: id => {
-    dispatch(deleteTask(id));
-  },
-  onDeleteChecked: ids => {
-    dispatch(deleteCheckedTasks(ids));
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TasksDel);
+export default TasksDel;

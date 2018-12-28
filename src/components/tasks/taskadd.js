@@ -1,21 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addTask } from "../../actions/tasks";
+import PropTypes from "prop-types";
 
 class TaskAdd extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       task: {
         title: "",
         description: "",
         priority: "",
         duedate: "",
-        userid: "",
         done: false
       }
     };
   }
+
+  static propTypes = {
+    task: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      priority: PropTypes.number.isRequired,
+      duedate: PropTypes.string.isRequired,
+      done: PropTypes.bool
+    })
+  };
 
   handleChange(field, e) {
     let newtask = Object.assign(this.state.task);
@@ -29,10 +39,8 @@ class TaskAdd extends React.Component {
   }
 
   handlePriority(priority) {
-    let field = document.getElementById("priority");
-    field.value = priority;
     let prior = this.state.task;
-    prior.priority = field.value;
+    prior.priority = priority;
     this.setState(() => ({ task: prior }));
   }
 
@@ -46,10 +54,11 @@ class TaskAdd extends React.Component {
         <br />
         <div class="form-signin-heading">
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <div>
+            <div id="inputs">
               <input
                 className="form-control"
                 placeholder="Title"
+                id="title"
                 type="text"
                 onChange={this.handleChange.bind(this, "title")}
               />
@@ -64,12 +73,16 @@ class TaskAdd extends React.Component {
                 className="form-control"
                 placeholder="Choose task priority"
                 id="priority"
-                type="number"
                 onChange={this.handleChange.bind(this, "priority")}
                 disabled={true}
+                value={this.state.task.priority}
                 required
               />
-              <div className="text-left mb-3 mt-3" data-toggle="buttons">
+              <div
+                className="text-left mb-3 mt-3"
+                id="priorbtn"
+                data-toggle="buttons"
+              >
                 <span
                   className="btn btn-primary"
                   onClick={this.handlePriority.bind(this, "1")}
@@ -111,15 +124,4 @@ class TaskAdd extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onAddTask: task => {
-    dispatch(addTask(task));
-  }
-});
-
-const mapStateToProps = state => ({});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TaskAdd);
+export default TaskAdd;

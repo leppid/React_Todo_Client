@@ -1,20 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
-import { doneTask, deleteTask, getTask, getTasks } from "../../actions/tasks";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 class TasksList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tasks: []
-    };
-  }
-
-  static contextTypes = {
-    store: PropTypes.object
-  };
-
   static propTypes = {
     tasks: PropTypes.arrayOf(
       PropTypes.shape({
@@ -25,54 +12,30 @@ class TasksList extends React.Component {
     )
   };
 
-  componentDidMount() {
-    this.context.store.dispatch(getTasks());
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(() => ({ tasks: nextProps.tasks }));
-    console.log(nextProps.tasks);
-  }
-
   handleDelete(id) {
     this.props.onDeleteTask(id);
   }
 
-  handleSortByTitle() {
-    let tasks = [...this.props.tasks];
-    tasks.sort((a, b) => {
-      return a.title > b.title;
-    });
-    this.setState(() => ({ tasks: tasks }));
-  }
-
-  handleSortByPrior() {
-    let tasks = [...this.props.tasks];
-    tasks.sort((a, b) => {
-      return a.priority > b.priority;
-    });
-    this.setState(() => ({ tasks: tasks }));
-  }
-
   render() {
+    let tasks = this.props.tasks ? this.props.tasks : [];
     return (
       <div>
         <label className="mr-2">Sort by:</label>
         <a
           className="btn btn-light active mr-1"
-          onClick={this.handleSortByTitle.bind(this)}
+          onClick={this.props.sortByTitle}
         >
           Title
         </a>
         <a
           className="btn btn-light active mr-1"
-          onClick={this.handleSortByPrior.bind(this)}
+          onClick={this.props.sortByPriority}
         >
           Priority
         </a>
         <hr />
         <div className="row mb-2">
-          {this.state.tasks.map(task => {
+          {tasks.map(task => {
             if (!task.done) {
               const definePriorCalss =
                 task.priority === 1
@@ -116,7 +79,7 @@ class TasksList extends React.Component {
               );
             }
           })}
-          {this.state.tasks.map(task => {
+          {tasks.map(task => {
             if (task.done) {
               return (
                 <div id="key" key={task.id} className="col-md-6">
@@ -149,20 +112,4 @@ class TasksList extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  tasks: state.task.items
-});
-
-const mapDispatchToProps = dispatch => ({
-  onDoneTask: (id, done) => {
-    dispatch(doneTask(id, done));
-  },
-  onDeleteTask: id => {
-    dispatch(deleteTask(id));
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TasksList);
+export default TasksList;

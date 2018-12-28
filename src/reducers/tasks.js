@@ -3,7 +3,9 @@ import {
   GET_TASK,
   ADD_TASK,
   DELETE_TASK,
-  DONE_TASK
+  DONE_TASK,
+  SORT_TASKS_BY_PRIORITY,
+  SORT_TASKS_BY_TITLE
 } from "../actions/actionTypes";
 
 export default function TaskReducer(
@@ -43,6 +45,24 @@ export default function TaskReducer(
       return {
         ...state,
         items: [action.payload, ...state.items]
+      };
+
+    case SORT_TASKS_BY_TITLE:
+      const sortedByTitile = state.items.sort((a, b) => {
+        return a.title > b.title;
+      });
+      return {
+        ...state,
+        items: sortedByTitile
+      };
+
+    case SORT_TASKS_BY_PRIORITY:
+      const sortedByPriority = state.items.sort((a, b) => {
+        return a.priority > b.priority;
+      });
+      return {
+        ...state,
+        items: sortedByPriority
       };
 
     default:

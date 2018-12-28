@@ -1,9 +1,9 @@
 import React from "react";
-import { token } from "./constants/user";
+import { token, testtoken } from "./constants/user";
 
 class Header extends React.Component {
   render() {
-    if (token && token.length === 60) {
+    if (token() && token().length === 60) {
       return (
         <div>
           <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bgheader border-bottom shadow-sm">

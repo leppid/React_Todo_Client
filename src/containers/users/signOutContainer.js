@@ -1,7 +1,7 @@
 import React from "react";
 import hist from "../../services/hist";
 
-class SignOut extends React.Component {
+class SignOutContainer extends React.Component {
   componentDidMount() {
     localStorage.removeItem("activation_digest");
     localStorage.removeItem("email");
@@ -15,4 +15,4 @@ class SignOut extends React.Component {
   }
 }
 
-export default SignOut;
+export default SignOutContainer;

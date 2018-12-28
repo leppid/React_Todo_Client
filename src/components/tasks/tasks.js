@@ -1,5 +1,5 @@
 import React from "react";
-import TasksList from "./taskslist";
+import TasksList from "../../containers/tasks/taskListContainer";
 
 class Tasks extends React.Component {
   render() {

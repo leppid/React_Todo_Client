@@ -1,12 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { signup } from "../../actions/users";
 
 class SignUp extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       user: {
         firstname: "",
@@ -22,7 +18,6 @@ class SignUp extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.onSignUp(this.state.user);
-    console.log(this.state.user);
   }
 
   handleChange(field, e) {
@@ -46,6 +41,7 @@ class SignUp extends React.Component {
                 className="form-control"
                 placeholder="Email"
                 type="email"
+                id="email"
                 onChange={this.handleChange.bind(this, "email")}
                 minLength="8"
               />
@@ -54,6 +50,7 @@ class SignUp extends React.Component {
                 className="form-control"
                 placeholder="Firstname"
                 type="text"
+                id="firstname"
                 onChange={this.handleChange.bind(this, "firstname")}
                 pattern="[A-Za-z]{3,10}"
               />
@@ -62,6 +59,7 @@ class SignUp extends React.Component {
                 className="form-control"
                 placeholder="Lastname"
                 type="text"
+                id="lastname"
                 onChange={this.handleChange.bind(this, "lastname")}
                 pattern="[A-Za-z]{4,12}"
                 required
@@ -71,6 +69,7 @@ class SignUp extends React.Component {
                 className="form-control"
                 placeholder="Password"
                 type="password"
+                id="password"
                 onChange={this.handleChange.bind(this, "password")}
                 minLength="6"
                 required
@@ -85,7 +84,12 @@ class SignUp extends React.Component {
                 required
               />
               <br />
-              <input className="btn btn-info" type="submit" value="Submit" />
+              <input
+                className="btn btn-info"
+                type="submit"
+                value="Submit"
+                id="submit"
+              />
               <br />
             </div>
           </form>
@@ -94,15 +98,4 @@ class SignUp extends React.Component {
     );
   }
 }
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => ({
-  onSignUp: user => {
-    dispatch(signup(user));
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignUp);
+export default SignUp;

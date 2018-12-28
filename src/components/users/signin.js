@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { signin } from "../../actions/sessions";
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +13,6 @@ class SignIn extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.onSignIn(this.state.session);
-    console.log(this.state.session);
   }
 
   handleChange(field, e) {
@@ -62,15 +59,4 @@ class SignIn extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => ({
-  onSignIn: session => {
-    dispatch(signin(session));
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignIn);
+export default SignIn;

@@ -1,26 +1,23 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { editTask, getTask } from "../../actions/tasks";
 import PropTypes from "prop-types";
 
 class TaskEdit extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { id, title, description, priority, duedate, done } = props.task;
     this.state = {
       task: {
-        title: "",
-        description: "",
-        priority: "",
-        duedate: "",
-        done: ""
+        id,
+        title,
+        description,
+        priority,
+        duedate,
+        done
       }
     };
   }
-
-  static contextTypes = {
-    store: PropTypes.object
-  };
 
   static propTypes = {
     item: PropTypes.shape({
@@ -31,15 +28,6 @@ class TaskEdit extends React.Component {
       done: PropTypes.bool
     })
   };
-
-  componentDidMount() {
-    let id = this.props.match.params.id;
-    this.context.store.dispatch(getTask(id));
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(() => ({ task: nextProps.task }));
-  }
 
   handleChange(field, e) {
     let newtask = Object.assign(this.state.task);
@@ -53,10 +41,8 @@ class TaskEdit extends React.Component {
   }
 
   handlePriority(priority) {
-    let field = document.getElementById("priority");
-    field.value = priority;
     let prior = this.state.task;
-    prior.priority = field.value;
+    prior.priority = priority;
     this.setState(() => ({ task: prior }));
   }
 
@@ -71,7 +57,7 @@ class TaskEdit extends React.Component {
         <br />
         <div class="form-signin-heading">
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <div>
+            <div id="inputs">
               <input
                 className="form-control"
                 placeholder="Title"
@@ -139,18 +125,4 @@ class TaskEdit extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  task: state.task.item
-});
-
-const mapDispatchToProps = dispatch => ({
-  onEditTask: task => {
-    dispatch(editTask(task));
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TaskEdit);
+export default TaskEdit;

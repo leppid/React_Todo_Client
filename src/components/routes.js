@@ -2,21 +2,21 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import p404 from "../components/p404";
 import Home from "../components/home";
-import SignOut from "../components/users/signout";
-import SignIn from "../components/users/signin";
-import SignUp from "../components/users/signup";
+import SignOut from "../containers/users/signOutContainer";
+import SignIn from "../containers/users/signInContainer";
+import SignUp from "../containers/users/signUpContainer";
 import Tasks from "../components/tasks/tasks";
-import TaskAdd from "../components/tasks/taskadd";
-import TaskEdit from "../components/tasks/taskedit";
-import TaskProfile from "../components/tasks/taskprofile";
-import TasksDel from "../components/tasks/tasksdel";
+import TaskAdd from "../containers/tasks/taskAddContainer";
+import TaskEdit from "../containers/tasks/taskEditContainer";
+import TaskProfile from "../containers/tasks/taskProfileContainer";
+import TasksDel from "../containers/tasks/tasksDelContainer";
 import About from "../components/about";
 import Activation from "../components/users/activation";
 import { token } from "../components/constants/user";
 
 class Routes extends React.Component {
   render() {
-    if (token && token.length === 60) {
+    if (token() && token().length === 60) {
       return (
         <Switch>
           <Route exact path="/" component={Tasks} />

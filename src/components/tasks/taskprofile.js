@@ -6,11 +6,6 @@ import hist from "../../services/hist";
 import PropTypes from "prop-types";
 
 class TaskProfile extends React.Component {
-  componentDidMount() {
-    const id = this.props.match.params.id;
-    this.props.onGetTask(id);
-  }
-
   static propTypes = {
     item: PropTypes.shape({
       title: PropTypes.string.isRequired,
@@ -23,6 +18,7 @@ class TaskProfile extends React.Component {
 
   handleDelete(id) {
     this.props.onDeleteTask(id);
+    this.setState(() => ({ task: {} }));
     hist.push("/");
   }
 
@@ -83,6 +79,7 @@ class TaskProfile extends React.Component {
               </h3>
               <hr />
               <span
+                id="btndone"
                 className={
                   !task.done
                     ? "btn btn-outline-success mr-2"
@@ -98,6 +95,7 @@ class TaskProfile extends React.Component {
                 <span className="btn btn-outline-warning mr-2">Edit</span>
               </Link>
               <span
+                id="btndelete"
                 className="btn btn-outline-danger"
                 onClick={this.handleDelete.bind(this, task.id)}
               >
@@ -111,23 +109,4 @@ class TaskProfile extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  task: state.task.item
-});
-
-const mapDispatchToProps = dispatch => ({
-  onGetTask: id => {
-    dispatch(getTask(id));
-  },
-  onDeleteTask: id => {
-    dispatch(deleteTask(id));
-  },
-  onDoneTask: (id, done) => {
-    dispatch(doneTask(id, done));
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TaskProfile);
+export default TaskProfile;

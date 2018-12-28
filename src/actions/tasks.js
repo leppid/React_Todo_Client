@@ -14,7 +14,7 @@ import {
 import { notify } from "reapop";
 
 let HEADERS = Object.assign({}, headers);
-HEADERS["Authorization"] = token;
+HEADERS["Authorization"] = token();
 
 export function getTasks() {
   return function(dispatch, getState) {
@@ -24,7 +24,6 @@ export function getTasks() {
       .then(res => {
         if (res.status === 200) {
           dispatch({ type: GET_TASKS, payload: res.data });
-          console.log(res.data);
         }
       })
       .catch(e => {
@@ -64,9 +63,13 @@ export function doneTask(id, done) {
         if (res.status === 200) {
           dispatch({ type: DONE_TASK, payload: res.data });
           if (done === true) {
-            dispatch(notify({ message: "Task Completed", status: "success" }));
+            dispatch(
+              notify({ message: "Task has been Completed", status: "success" })
+            );
           } else {
-            dispatch(notify({ message: "Task Activated", status: "info" }));
+            dispatch(
+              notify({ message: "Task has been Activated", status: "info" })
+            );
           }
         }
       })
