@@ -3,13 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {
-    "npm": "5.8.0",
-    "node": "9.11.1"
-  },
   "scripts": {
-    "postinstall": "npm install express",
     "start": "node server.js",
+    "heroku-postbuild": "webpack -p",
+    "startlocal": "webpack-dev-server --mode development --open --hot",
     "lint": "eslint --ext .jsx,.js src/",
     "build": "webpack --mode production --module-bind js=babel-loader",
     "dev": "webpack --mode development --module-bind js=babel-loader",
@@ -43,7 +40,7 @@
     "axios": "^0.18.0",
     "babel-plugin-react-html-attrs": "^2.1.0",
     "body-parser": "^1.15.2",
-    "express": "^4.16.4",
+    "express": "^4.14.0",
     "font-awesome": "^4.7.0",
     "heroku": "^7.19.4",
     "material-ui": "^0.16.4",
