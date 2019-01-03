@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "webpack-dev-server --mode development --open --hot",
     "lint": "eslint --ext .jsx,.js src/",
     "build": "webpack --mode production --module-bind js=babel-loader",
     "dev": "webpack --mode development --module-bind js=babel-loader",
