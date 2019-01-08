@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "heroku-postbuild": "webpack -p",
-    "startlocal": "webpack-dev-server --mode development --open --hot",
+    "localstart": "webpack-dev-server --mode development --open --hot",
     "lint": "eslint --ext .jsx,.js src/",
     "build": "webpack --mode production --module-bind js=babel-loader",
     "dev": "webpack --mode development --module-bind js=babel-loader",
