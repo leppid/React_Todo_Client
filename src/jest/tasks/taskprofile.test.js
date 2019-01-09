@@ -1,6 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
-import TaskProfile from "./taskprofile";
+import TaskProfile from "../../components/tasks/taskprofile";
 import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { Router } from "react-router-dom";

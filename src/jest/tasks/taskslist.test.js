@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import TasksList from "./taskslist";
+import TasksList from "../../components/tasks/taskslist";
 import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { Router } from "react-router-dom";

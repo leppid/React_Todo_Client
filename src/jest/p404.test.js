@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import P404 from "./p404";
+import P404 from "../components/p404";
 
 describe("Component", () => {
   const wrapper = shallow(<P404 />);

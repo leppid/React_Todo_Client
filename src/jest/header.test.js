@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./header";
+import Header from "../components/header";
 import { mount } from "enzyme";
-import { setToken } from "./constants/user";
+import { setToken } from "../components/constants/user";
 
 describe("Component render", () => {
   beforeEach(() => {

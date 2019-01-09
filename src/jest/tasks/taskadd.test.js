@@ -1,6 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
-import TaskAdd from "./taskadd";
+import TaskAdd from "../../components/tasks/taskadd";
 import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import reducers from "../../reducers";

@@ -1,6 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
-import TaskEdit from "./taskedit";
+import TaskEdit from "../../components/tasks/taskedit";
 import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import reducers from "../../reducers";
